@@ -1,0 +1,16 @@
+package:
+    type:           yii2-extension
+    name:           hipanel-mrdp
+    title:          HiPanel module for MRDP compatibility
+    headline:       HiPanel MRDP
+    keywords:       hipanel, mrdp
+    namespace:      hipanel\mrdp
+    description:    |
+        [![Logo](https://raw.githubusercontent.com/hiqdev/hipanel-core/master/docs/logo.png)](https://hipanel.com/)
+
+        [HiPanel](http://hipanel.com/) is the next generation control panel for hosting, domains and more.
+
+        This package provides MRDP compatibility features:
+
+        - return to old panel
+        - more later
