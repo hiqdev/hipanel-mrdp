@@ -14,7 +14,7 @@ return [
             'translations' => [
                 'hipanel:mrdp' => [
                     'class' => \yii\i18n\PhpMessageSource::class,
-                    'basePath' => '@ahnames/hipanel/messages',
+                    'basePath' => '@hipanel/mrdp/messages',
                 ],
             ],
         ],
@@ -25,7 +25,7 @@ return [
                 'add' => [
                     'old-panel' => [
                         'menu' => [
-                            'class' => \hipanel\mrdp\OldPanelMenu::class,
+                            'class' => \hipanel\mrdp\menus\OldPanelMenu::class,
                             'url' => $params['mrdp.returnUrl'],
                         ],
                         'where' => 'last',
