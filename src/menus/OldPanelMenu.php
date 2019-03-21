@@ -21,7 +21,11 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
     {
         $userId = Yii::$app->user->identity->id;
         $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
-            return (bool)Client::findOne($userId)->hipanel_forced;
+            try {
+                return (bool)Client::findOne($userId)->hipanel_forced;
+            } catch (\Exception $e) {
+                return true;
+            }
         }, 86400); // 1 day
 
         return [
