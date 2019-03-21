@@ -10,6 +10,7 @@
 
 namespace hipanel\mrdp\menus;
 
+use hipanel\modules\client\models\Client;
 use Yii;
 
 class OldPanelMenu extends \hiqdev\yii2\menus\Menu
@@ -18,6 +19,15 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
 
     public function items()
     {
+        $userId = Yii::$app->user->identity->id;
+        $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
+            try {
+                return (bool)Client::findOne($userId)->hipanel_forced;
+            } catch (\Exception $e) {
+                return true;
+            }
+        }, 86400); // 1 day
+
         return [
             'additional' => [
                 'label' => '<br/>',
@@ -27,8 +37,9 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
                 'label' => Yii::t('hipanel:mrdp', 'Return to old panel'),
                 'icon' => 'fa-sign-out fa-fw fa-flip-horizontal',
                 'url' => $this->url,
-                'visible' => !Yii::$app->session->get('hipanel_forced', false),
+                'visible' => $showButton,
             ],
         ];
     }
+
 }
