@@ -27,6 +27,7 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
                 'label' => Yii::t('hipanel:mrdp', 'Return to old panel'),
                 'icon' => 'fa-sign-out fa-fw fa-flip-horizontal',
                 'url' => $this->url,
+                'visible' => !Yii::$app->session->get('hipanel_forced', false),
             ],
         ];
     }
