@@ -14,7 +14,7 @@ return [
             'translations' => [
                 'hipanel:mrdp' => [
                     'class' => \yii\i18n\PhpMessageSource::class,
-                    'basePath' => '@hipanel/mrdp/messages',
+                    'basePath' => dirname(__DIR__) . '/src/messages',
                 ],
             ],
         ],
