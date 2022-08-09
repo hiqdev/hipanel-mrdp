@@ -16,17 +16,22 @@ use Yii;
 class OldPanelMenu extends \hiqdev\yii2\menus\Menu
 {
     public $url;
+    const ONE_DAY = 86400;
 
     public function items()
     {
-        $userId = Yii::$app->user->identity->id;
-        $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
-            try {
-                return (bool)Client::findOne($userId)->hipanel_forced;
-            } catch (\Exception $e) {
-                return true;
-            }
-        }, 86400); // 1 day
+        $userId = Yii::$app->user->identity?->id;
+        if ($userId === null) {
+            $showButton = false;
+        } else {
+            $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
+                try {
+                    return (bool)Client::findOne($userId)->hipanel_forced;
+                } catch (\Exception $e) {
+                    return true;
+                }
+            }, self::ONE_DAY);
+        }
 
         return [
             'additional' => [
