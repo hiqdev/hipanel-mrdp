@@ -26,7 +26,7 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
         } else {
             $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
                 try {
-                    return (bool)Client::findOne($userId)->hipanel_forced;
+                    return (bool)Client::findOne($userId)?->hipanel_forced;
                 } catch (\Exception $e) {
                     return true;
                 }
