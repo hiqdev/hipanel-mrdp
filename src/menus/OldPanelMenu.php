@@ -24,11 +24,12 @@ class OldPanelMenu extends \hiqdev\yii2\menus\Menu
         if ($userId === null) {
             $showButton = false;
         } else {
+            // Cached as int: getOrSet() treats a cached `false` as a miss and would query the API on every page.
             $showButton = !Yii::$app->getCache()->getOrSet([$userId, __CLASS__], function () use ($userId) {
                 try {
-                    return (bool)Client::findOne($userId)?->hipanel_forced;
+                    return (int)(bool)Client::findOne($userId)?->hipanel_forced;
                 } catch (\Exception $e) {
-                    return true;
+                    return 1;
                 }
             }, self::ONE_DAY);
         }
